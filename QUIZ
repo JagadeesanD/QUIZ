@@ -1,0 +1,103 @@
+#CODE IN THE JAVA SCRIPT 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple JavaScript Quiz</title>
+</head>
+<body>
+  <h1>Simple JavaScript Quiz</h1>
+  <div id="quiz-container">
+    <p id="question"></p>
+    <ul id="options">
+      <!-- Options will be filled dynamically using JavaScript -->
+    </ul>
+    <button id="submit-btn">Submit Answer</button>
+  </div>
+  <div id="result" style="display: none;">
+    <h2>Your Score:</h2>
+    <p id="score"></p>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "What is the capital of France?",
+        options: ["London", "Berlin", "Paris", "Rome"],
+        answer: "Paris"
+      },
+      {
+        question: "Which planet is closest to the Sun?",
+        options: ["Venus", "Mars", "Mercury", "Jupiter"],
+        answer: "Mercury"
+      },
+      {
+        question: "What is 2 + 2?",
+        options: ["3", "4", "5", "6"],
+        answer: "4"
+      }
+      
+    ];
+
+    const quizContainer = document.getElementById("quiz-container");
+    const questionElement = document.getElementById("question");
+    const optionsElement = document.getElementById("options");
+    const submitButton = document.getElementById("submit-btn");
+    const resultContainer = document.getElementById("result");
+    const scoreElement = document.getElementById("score");
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    function showQuestion() {
+      const currentQuestion = quizData[currentQuestionIndex];
+      questionElement.textContent = currentQuestion.question;
+
+     
+      optionsElement.innerHTML = "";
+
+
+      currentQuestion.options.forEach(option => {
+        const li = document.createElement("li");
+        li.textContent = option;
+        li.addEventListener("click", () => checkAnswer(option));
+        optionsElement.appendChild(li);
+      });
+    }
+
+    function checkAnswer(selectedOption) {
+      const currentQuestion = quizData[currentQuestionIndex];
+      if (selectedOption === currentQuestion.answer) {
+        score++;
+      }
+
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < quizData.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      quizContainer.style.display = "none";
+      resultContainer.style.display = "block";
+      scoreElement.textContent = `${score} out of ${quizData.length}`;
+    }
+
+    showQuestion();
+
+    submitButton.addEventListener("click", () => {
+      const selectedOption = document.querySelector("li.selected");
+      if (selectedOption) {
+        checkAnswer(selectedOption.textContent);
+      }
+
+#Java Script code for the Quiz 
+#Tried The best 
+    });
+  </script>
+</body>
+</html>
